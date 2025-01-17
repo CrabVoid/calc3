@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div>
@@ -38,28 +39,33 @@
         let errors = inputValidation(num1Value, num2Value, operatorValue);
 
         let errorCheck = errorsDisplay(errors);
-        if (errors.lenght > 0) {
+        if (errorCheck.lenght > 0) {
           output.innerHTML = errorCheck;
+        } else {
+          let math = calculationWork(num1Value, num2Value, operatorValue);
+          output.innerHTML = math;
         }
+      }
 
-        switch (operatorValue) {
+      function calculationWork(n1, n2, op) {
+        switch (op) {
           case "+":
-            result = num1Value + num2Value;
+            result = n1 + n2;
             break;
           case "-":
-            result = num1Value - num2Value;
+            result = n1 - n2;
             break;
           case "/":
-            result = num1Value / num2Value;
+            result = n1 / n2;
             break;
           case "*":
-            result = num1Value * num2Value;
+            result = n1 * n2;
             break;
 
           default:
             break;
         }
-        output.innerHTML = result;
+        return result;
       }
 
       function inputValidation(n1, n2, op) {
@@ -67,25 +73,28 @@
 
         if (isNaN(n1)) errors.push("1st number is incorrect");
         if (isNaN(n2)) errors.push("2nd number is incorrect");
-        if (!["+", "-", "*", "/"].includesop)
+        if (!["+", "-", "*", "/"].includes(op))
           errors.push("operator is not validated");
 
         return errors;
       }
 
-      function errorsDisplay(ary) {
+      function errorsDisplay(ero) {
         let error = "";
-        for (let i = 0; i < ary.length; i++) {
-          error += `<li>${ary[i]}</li>`;
+        for (let i = 0; i < ero.length; i++) {
+          error += `<li>${ero[i]}</li>`;
         }
-        return `<ul>${error}</ul>`;
+        result = `<ul>${error}</ul>`;
+        return result;
       }
 
       function clearFields() {
-        let num1 = "";
-        let num2 = "";
-        let opera = "";
+        let num1Value = "";
+        let num2Value = "";
+        let operatorValue = "";
         let output = "";
+
+        console.log("click clear");
       }
     </script>
   </body>
