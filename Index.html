@@ -33,6 +33,15 @@
         num2Value = parseFloat(num2.value);
         operatorValue = opera.value;
 
+        let result = "";
+
+        let errors = inputValidation(num1Value, num2Value, operatorValue);
+
+        let errorCheck = errorsDisplay(errors);
+        if (errors.lenght > 0) {
+          output.innerHTML = errorCheck;
+        }
+
         switch (operatorValue) {
           case "+":
             result = num1Value + num2Value;
@@ -51,6 +60,25 @@
             break;
         }
         output.innerHTML = result;
+      }
+
+      function inputValidation(n1, n2, op) {
+        let errors = [];
+
+        if (isNaN(n1)) errors.push("1st number is incorrect");
+        if (isNaN(n2)) errors.push("2nd number is incorrect");
+        if (!["+", "-", "*", "/"].includesop)
+          errors.push("operator is not validated");
+
+        return errors;
+      }
+
+      function errorsDisplay(ary) {
+        let error = "";
+        for (let i = 0; i < ary.length; i++) {
+          error += `<li>${ary[i]}</li>`;
+        }
+        return `<ul>${error}</ul>`;
       }
 
       function clearFields() {
